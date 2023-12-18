@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "455144685476",
+    "project_id": "aplicacion-evaluacion",
+    "storage_bucket": "aplicacion-evaluacion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455144685476:android:371d2ded8daab1c7ff8b31",
+        "android_client_info": {
+          "package_name": "com.example.clinica_caduceo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8vHkWSCcASJQPOwPE6X1ZsnGd2VlqI38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
