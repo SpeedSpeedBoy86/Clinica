@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Clinica_Caduceo"
         tools:targetApi="31">
+        <activity
+            android:name=".TokenActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginUserNameActivity"
             android:exported="false" />
@@ -35,6 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".PushService"
             android:exported="false">

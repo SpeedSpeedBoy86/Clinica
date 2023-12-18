@@ -1,15 +1,17 @@
 package com.example.clinica_caduceo;
 
-import android.app.Notification;
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.example.clinica_caduceo.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -24,8 +26,6 @@ public class PushService extends FirebaseMessagingService {
 
     private static final String TAG = "PushService";
     private static final String CHANNEL_ID = "clinica_caduceo_channel";
-
-    // Variable de clase para almacenar el token
     private static String fcmToken;
 
     @Override
@@ -106,7 +106,7 @@ public class PushService extends FirebaseMessagingService {
     }
 
     private void mostrarNotificacion(String cuerpoMensaje) {
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
@@ -123,13 +123,20 @@ public class PushService extends FirebaseMessagingService {
                 .setContentText(cuerpoMensaje)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        Notification notification = builder.build();
-        notificationManager.notify(0, notification);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        notificationManager.notify(0, builder.build());
     }
 
-    // Función para obtener el token almacenado en la variable de clase
     public static String getFcmToken() {
         return fcmToken;
     }
 }
-
